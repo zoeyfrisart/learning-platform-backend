@@ -1,0 +1,32 @@
+{
+  "name": "keystone-app",
+  "version": "2.0.9",
+  "private": true,
+  "scripts": {
+    "dev": "keystone-next dev",
+    "start": "keystone-next start",
+    "build": "keystone-next build",
+    "postinstall": "keystone-next postinstall"
+  },
+  "dependencies": {
+    "@keystone-next/auth": "^29.0.0",
+    "@keystone-next/fields": "^12.0.0",
+    "@keystone-next/fields-document": "^7.0.2",
+    "@keystone-next/keystone": "^22.0.0",
+    "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/eslint-parser": "^7.14.7",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
+    "eslint": "^7.31.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-kentcdodds": "^19.1.1",
+    "eslint-nibble": "^7.0.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0"
+  }
+}

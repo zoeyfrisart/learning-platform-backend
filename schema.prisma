@@ -1,0 +1,67 @@
+datasource postgresql {
+  url      = env("DATABASE_URL")
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "node_modules/.prisma/client"
+}
+
+model User {
+  id       String    @id @default(cuid())
+  name     String?
+  email    String?   @unique
+  password String?
+  role     Role?     @relation("User_role", fields: [roleId], references: [id])
+  roleId   String?   @map("role")
+  posts    Content[] @relation("Content_author")
+
+  @@index([roleId])
+}
+
+model Role {
+  id                String   @id @default(cuid())
+  name              String?  @unique
+  canManageRoles    Boolean?
+  canViewRoles      Boolean?
+  canApproveContent Boolean?
+  canManageContent  Boolean?
+  canSuggestContent Boolean?
+  canManageUsers    Boolean?
+  canViewUsers      Boolean?
+  canManageTags     Boolean?
+  assignedTo        User[]   @relation("User_role")
+}
+
+model Content {
+  id              String             @id @default(cuid())
+  image_filesize  Int?
+  image_extension String?
+  image_width     Int?
+  image_height    Int?
+  image_mode      String?
+  image_id        String?
+  title           String?
+  description     String?
+  tags            Tag[]              @relation("Content_tags_Tag_posts")
+  link            String?
+  status          ContentStatusType?
+  author          User?              @relation("Content_author", fields: [authorId], references: [id])
+  authorId        String?            @map("author")
+
+  @@index([authorId])
+}
+
+model Tag {
+  id    String    @id @default(cuid())
+  name  String?   @unique
+  color String?
+  posts Content[] @relation("Content_tags_Tag_posts")
+}
+
+enum ContentStatusType {
+  suggestion
+  declined
+  approved
+}
