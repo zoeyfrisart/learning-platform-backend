@@ -1,4 +1,4 @@
-import { image, relationship, select, text } from "@keystone-next/fields";
+import { relationship, select, text } from "@keystone-next/fields";
 import { list } from "@keystone-next/keystone/schema";
 import { permissions, rules } from "../access";
 
@@ -10,7 +10,6 @@ const Content = list({
     delete: permissions.canManageContent
   },
   fields: {
-    image: image(),
     title: text({
       isRequired: true
     }),

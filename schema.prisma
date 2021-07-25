@@ -35,20 +35,14 @@ model Role {
 }
 
 model Content {
-  id              String             @id @default(cuid())
-  image_filesize  Int?
-  image_extension String?
-  image_width     Int?
-  image_height    Int?
-  image_mode      String?
-  image_id        String?
-  title           String?
-  description     String?
-  tags            Tag[]              @relation("Content_tags_Tag_posts")
-  link            String?
-  status          ContentStatusType?
-  author          User?              @relation("Content_author", fields: [authorId], references: [id])
-  authorId        String?            @map("author")
+  id          String             @id @default(cuid())
+  title       String?
+  description String?
+  tags        Tag[]              @relation("Content_tags_Tag_posts")
+  link        String?
+  status      ContentStatusType?
+  author      User?              @relation("Content_author", fields: [authorId], references: [id])
+  authorId    String?            @map("author")
 
   @@index([authorId])
 }

@@ -358,7 +358,6 @@ input RolesCreateInput {
 """
 type Content {
   id: ID!
-  image: ImageFieldOutput
   title: String
   description: String
   tags(
@@ -388,37 +387,10 @@ type Content {
   author: User
 }
 
-interface ImageFieldOutput {
-  id: ID!
-  filesize: Int!
-  width: Int!
-  height: Int!
-  extension: ImageExtension!
-  ref: String!
-  src: String!
-}
-
-enum ImageExtension {
-  jpg
-  png
-  webp
-  gif
-}
-
 enum ContentStatusType {
   suggestion
   declined
   approved
-}
-
-type LocalImageFieldOutput implements ImageFieldOutput {
-  id: ID!
-  filesize: Int!
-  width: Int!
-  height: Int!
-  extension: ImageExtension!
-  ref: String!
-  src: String!
 }
 
 input ContentWhereInput {
@@ -535,7 +507,6 @@ input ContentOrderByInput {
 }
 
 input ContentUpdateInput {
-  image: ImageFieldInput
   title: String
   description: String
   tags: TagRelateToManyInput
@@ -543,16 +514,6 @@ input ContentUpdateInput {
   status: ContentStatusType
   author: UserRelateToOneInput
 }
-
-input ImageFieldInput {
-  upload: Upload
-  ref: String
-}
-
-"""
-The `Upload` scalar type represents a file upload.
-"""
-scalar Upload
 
 input TagRelateToManyInput {
   create: [TagCreateInput]
@@ -574,7 +535,6 @@ input ContentsUpdateInput {
 }
 
 input ContentCreateInput {
-  image: ImageFieldInput
   title: String
   description: String
   tags: TagRelateToManyInput
